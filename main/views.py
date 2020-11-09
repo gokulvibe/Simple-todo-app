@@ -6,6 +6,11 @@ from accounts.views import *
 
 
 def home(request):
-    todos = TodoList.objects.all()
     
-    return render(request,'main/index.html',{'todos':todos})
+    if request.user.is_authenticated:
+            username = request.user.id
+            todos = TodoList.objects.filter(owner=username)
+            return render(request,'main/index.html',{'todos':todos})
+    else:
+        return render(request,'main/index.html')
+    
