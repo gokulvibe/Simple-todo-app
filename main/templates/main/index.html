@@ -1,11 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>The Page</title>
 </head>
+
 <body>
-    <h1>Hi</h1>
+    <p>This is great</p>
+    {% if user.is_authenticated%}
+    <li>Hello,{{user.first_name}}</li>
+    <li><a href="accounts/logout">Logout</a></li>
+    {% else %}
+    <li><a href="accounts/register">Register</a></li>
+    <li><a href="accounts/login">Login</a></li>
+    {% endif %}
+    <br> 
+    {% for todo in todos %} 
+    {% if todo.done %}
+    <h1><strike>{{todo.taskname}}</strike></h1><br>
+    {%else%}
+    <h1>{{todo.taskname}}</h1><br>
+    
+    {% endif %} {% endfor %}
 </body>
+
 </html>
